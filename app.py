@@ -252,7 +252,7 @@ st.markdown("""
 # SIDEBAR NAVIGASI
 # ==============================================================
 with st.sidebar:
-    st.markdown("## 🏫 SPK Prioritas Pendidikan & Alokasi MBG")
+    st.markdown("Sistem Prioritas Pendidikan & Gizi (SPPG)")
     st.markdown("---")
     menu = st.selectbox(
         "Pilih Menu",
@@ -342,7 +342,7 @@ if menu == "📥 Input Data":
     st.markdown('<div class="main-title">📥 Input Data Kecamatan</div>', unsafe_allow_html=True)
 
     # Dua tab: Input Manual & Upload Excel
-    tab_manual, tab_excel = st.tabs(["Input Manual", "📂 Upload Data Excel (Bulk)"])
+    tab_manual, tab_excel = st.tabs(["Input Manual", "📂 Upload Data Excel"])
 
     # =========================================================
     # TAB 1: INPUT MANUAL (form satuan — sama seperti sebelumnya)
@@ -549,7 +549,7 @@ elif menu == "📋 Data Alternatif":
             st.markdown("---")
             with st.expander("⚠️Hapus Semua Data"):
                 st.warning("Aksi ini akan menghapus **seluruh** data dari tabel secara permanen!")
-                if st.button("🗑️ Kosongkan Tabel (TRUNCATE)", type="secondary"):
+                if st.button("🗑️ Kosongkan Tabel", type="secondary"):
                     with conn.cursor() as cur:
                         cur.execute("TRUNCATE TABLE data_kecamatan")
                     st.success("✅ Tabel berhasil dikosongkan.")
@@ -647,9 +647,9 @@ elif menu == "📊 Analisis TOPSIS & Rekomendasi":
         hide_index=True,
         column_config={
             "Peringkat"           : st.column_config.NumberColumn("🏆 Peringkat", width="small"),
-            "Kecamatan"           : st.column_config.TextColumn("📍 Kecamatan", width="medium"),
-            "Nilai Preferensi (V)": st.column_config.TextColumn("📈 Nilai V", width="small"),
-            "Rekomendasi Tindakan": st.column_config.TextColumn("💡 Rekomendasi Tindakan", width="large"),
+            "Kecamatan"           : st.column_config.TextColumn("Kecamatan", width="medium"),
+            "Nilai Preferensi (V)": st.column_config.TextColumn("Nilai V", width="small"),
+            "Rekomendasi Tindakan": st.column_config.TextColumn("Rekomendasi Tindakan", width="large"),
         },
     )
 
@@ -666,7 +666,7 @@ elif menu == "📊 Analisis TOPSIS & Rekomendasi":
 
     # ---- RINGKASAN EKSEKUTIF ----
     st.markdown("---")
-    st.subheader("📌 Ringkasan Eksekutif per Kelompok")
+    st.subheader("Ringkasan Eksekutif per Kelompok")
     st.caption(
         "Semua kecamatan dibagi 3 kelompok berdasarkan nilai V (sistem Tertil 33%). "
         "Setiap kecamatan mendapat keputusan kebijakan yang bermakna."
