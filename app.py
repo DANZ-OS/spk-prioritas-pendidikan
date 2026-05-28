@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import pymysql
-import io  # untuk generate file Excel/CSV di memory tanpa menyimpan ke disk
+import io  
 
 # ==============================================================
 # KONFIGURASI HALAMAN
@@ -13,11 +13,8 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-# ==============================================================
-# DEFINISI KRITERIA & BOBOT
-# ==============================================================
 KRITERIA = ["C1", "C2", "C3", "C4"]
-BOBOT    = [0.15, 0.30, 0.40, 0.15]          # Total = 1.0
+BOBOT    = [0.15, 0.30, 0.40, 0.15]          
 SIFAT    = ["benefit", "cost", "benefit", "cost"]  # benefit=max, cost=min
 
 LABEL_KRITERIA = {
@@ -27,9 +24,6 @@ LABEL_KRITERIA = {
     "C4": "Jml. Sekolah Ada",
 }
 
-# ==============================================================
-# KONEKSI DATABASE (di-cache agar tidak reconnect tiap refresh)
-# ==============================================================
 @st.cache_resource
 def get_connection():
     """
@@ -73,7 +67,6 @@ def get_conn():
     try:
         conn.ping(reconnect=True)
     except Exception:
-        # Hapus cache dan coba ulang sekali
         get_connection.clear()
         conn = get_connection()
     return conn
@@ -97,9 +90,8 @@ def init_table():
         """)
 
 
-# ==============================================================
 # FUNGSI TOPSIS
-# ==============================================================
+
 def hitung_topsis(df: pd.DataFrame) -> dict:
     """
     Menghitung seluruh langkah TOPSIS dan mengembalikan dict berisi
